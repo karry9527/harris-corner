@@ -10,10 +10,10 @@ using namespace cv;
 using namespace std;
 
 
-void Gaussian(float kernel[][3], float sigma)
+void Gaussian(float kernel[][3])
 {
 	
-	float sum = 0.0, temp;
+	float sum = 0.0, temp, sigma = 1;
 	for (int x = -1; x <= 1; x++)
 		for (int y = -1; y <= 1; y++)
 		{
@@ -29,24 +29,11 @@ void Gaussian_filter(Mat &image)
 	
 		//for (int i = 0; i < response.cols; i++)
 	float kernel[3][3];
-
+	Gaussian(kernel);
 	for (int j = 1; j < image.rows - 1; j++)
 		for (int i = 1; i < image.cols - 1; i++)
 		{
-			float sum = 0, sigma;
-			//calculate sigma
-			float sum_x = 0, sum_qua_x = 0;
-			for (int y = 0; y < 3; y++)
-				for (int x = 0; x < 3; x++)
-				{
-					sum_x += image.at<float>(j - 1 + y, i - 1 + x);
-					sum_qua_x += pow(image.at<float>(j - 1 + y, i - 1 + x), 2);
-				}
-			float average = sum_x / 9;
-			sigma = sqrt(sum_qua_x / 9 - pow(average, 2));
-			cout << "simga:" << sigma << endl;
-			Gaussian(kernel, sigma);
-
+			float sum = 0;
 			for (int y = 0; y < 3; y++)
 				for (int x = 0; x < 3; x++)
 				{
@@ -128,9 +115,6 @@ int main()
 	//	Point(-1, -1), false, BORDER_DEFAULT);
 	//boxFilter(img_grad_xy, img_grad_xy, img_grad_xy.depth(), Size(patchSize, patchSize),
 	//	Point(-1, -1), false, BORDER_DEFAULT);
-	normalize(img_grad_xx, img_grad_xx, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
-	normalize(img_grad_yy, img_grad_xx, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
-	normalize(img_grad_xy, img_grad_xx, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
 	Gaussian_filter(img_grad_xx);
 	Gaussian_filter(img_grad_yy);
 	Gaussian_filter(img_grad_xy);
