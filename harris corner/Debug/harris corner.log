@@ -1,0 +1,16 @@
+﻿Build started 2015/10/20 下午 02:01:17.
+     1>Project "C:\Users\cggm\Documents\Visual Studio 2013\Projects\harris corner\harris corner\harris corner.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\opencv\build\include\opencv2\core\mat.hpp(1965): warning C4819: The file contains a character that cannot be represented in the current code page (950). Save the file in Unicode format to prevent data loss
+     1>c:\opencv\build\include\opencv2\core\persistence.hpp : warning C4819: The file contains a character that cannot be represented in the current code page (950). Save the file in Unicode format to prevent data loss
+     1>c:\opencv\build\include\opencv2\core\utility.hpp : warning C4819: The file contains a character that cannot be represented in the current code page (950). Save the file in Unicode format to prevent data loss
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\cggm\Documents\Visual Studio 2013\Projects\harris corner\Debug\harris corner.exe" /INCREMENTAL /NOLOGO C:\opencv\build\x86\vc11\lib\opencv_ts300d.lib C:\opencv\build\x86\vc11\lib\opencv_world300d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\cggm\Documents\Visual Studio 2013\Projects\harris corner\Debug\harris corner.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\cggm\Documents\Visual Studio 2013\Projects\harris corner\Debug\harris corner.lib" /MACHINE:X86 Debug\main.obj
+         harris corner.vcxproj -> C:\Users\cggm\Documents\Visual Studio 2013\Projects\harris corner\Debug\harris corner.exe
+     1>Done Building Project "C:\Users\cggm\Documents\Visual Studio 2013\Projects\harris corner\harris corner\harris corner.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.93

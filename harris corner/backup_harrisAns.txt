@@ -1,0 +1,93 @@
+#include<iostream>  
+#include <opencv2/core/core.hpp>  
+#include <opencv2/highgui/highgui.hpp>  
+#include <opencv2/imgproc/imgproc.hpp>
+
+
+using namespace cv;
+using namespace std;
+
+int main()
+{
+
+	Mat img = imread("pic.jpg"), gray_img, Gaussian_img;
+	namedWindow("123");
+	//GaussianBlur(img, Gaussian_img, Size(3, 3), 0, 0, BORDER_DEFAULT);
+	//cvtColor(Gaussian_img, gray_img, CV_RGB2GRAY);
+	cvtColor(img, gray_img, CV_RGB2GRAY);
+
+
+	Mat img_grad_x, img_grad_y, dst_img, norm_dst_img;
+	Mat abs_grad_x, abs_grad_y;
+	int blockSize = 2, apertureSize = 3, thresh = 100;
+	float k = 0.04, Ix, Iy, R;
+	//(int)gray_img.at<float>(1, 1);
+	int scale = 1, delta = 0, ddepth = CV_16S;
+	cout << gray_img.at<Vec2b>(1, 1) << endl;
+	Sobel(gray_img, img_grad_x, ddepth, 1, 0, 3, scale, delta, BORDER_DEFAULT);
+	convertScaleAbs(img_grad_x, abs_grad_x);
+	Sobel(gray_img, img_grad_y, ddepth, 0, 1, 3, scale, delta, BORDER_DEFAULT);
+	convertScaleAbs(img_grad_y, abs_grad_y);
+	//cout << abs_grad_x.at<float>(1, 1);
+	for (int j = 0; j < gray_img.rows - 1; j++)
+	{
+		for (int i = 0; i < gray_img.cols - 1; i++)
+		{
+
+			
+			
+			//printf("%f", gray_img.at<float>(j + 1, i));
+			//Ix = (gray_img.at<float>(j + 1, i) - gray_img.at<float>(j, i)) * 0.166666667f;
+			//Iy = (gray_img.at<float>(j, i+1) - gray_img.at<float>(j, i)) * 0.166666667f;
+			//R = Ix * Iy - k * (Ix + Iy);
+			//dst_img.at<float>(j, i) = R;
+		}
+	}
+	//normalize(dst_img, norm_dst_img, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
+	
+
+
+	cornerHarris(gray_img, dst_img, blockSize, apertureSize, k, BORDER_DEFAULT);
+	normalize(dst_img, norm_dst_img, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
+	convertScaleAbs(norm_dst_img, dst_img);
+	//cout << gray_img.at<double>(1, 1) << endl;
+	//存取矩陣元素、存取圖片像素，行列次序剛好顛倒
+	
+	for (int j = 0; j < norm_dst_img.rows; j++)
+	{
+		for (int i = 0; i < norm_dst_img.cols; i++)
+		{
+			if ((int)norm_dst_img.at<float>(j, i) > thresh)
+			{
+				circle(img, Point(i, j), 5, Scalar(0, 0, 255), 2, 8, 0);
+			}
+		}
+	}
+	/*Mat abs_grad_xx, abs_grad_yy, abs_grad_xy, det, trace, response, d;
+	
+	multiply(abs_grad_x, abs_grad_x, abs_grad_xx);
+	multiply(abs_grad_y, abs_grad_y, abs_grad_yy);
+	multiply(abs_grad_x, abs_grad_y, abs_grad_xy);
+	multiply(abs_grad_xx, abs_grad_yy, det);
+	add(abs_grad_xx, abs_grad_yy, trace);
+	multiply(trace, trace, trace);
+	trace = k * trace;
+	response = det - trace;
+	normalize(response, response, 0, 255, NORM_MINMAX, CV_32FC1, Mat());
+	for (int j = 0; j < response.rows; j++)
+	{
+		for (int i = 0; i < response.cols; i++)
+		{
+			if ((int)response.at<float>(j, i) > thresh)
+			{
+				circle(img, Point(i, j), 5, Scalar(0, 0, 255), 2, 8, 0);
+			}
+		}
+	}*/
+	//Mat grad;
+	//addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0, grad);
+	imshow("123", norm_dst_img);
+	//imshow("456", abs_grad_y);
+	//imshow("123", norm_dst_img);
+	waitKey(6000);
+}
